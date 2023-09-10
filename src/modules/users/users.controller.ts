@@ -13,8 +13,8 @@ import {
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
-import { UserAvatar } from '../decorators/user-avatar.decorator';
-import { UserId } from '../decorators/user-id.decorator';
+import { UserAvatar } from '../../decorators/user-avatar.decorator';
+import { UserId } from '../../decorators/user-id.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';

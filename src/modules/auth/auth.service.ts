@@ -4,12 +4,14 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UserEntity } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
+import {ConfigService} from "@nestjs/config";
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private configService: ConfigService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -41,5 +43,12 @@ export class AuthService {
     return {
       token: this.jwtService.sign({ id: user.id }),
     };
+  }
+
+  validateApiKey(apiKey: string) {
+    const apiKeys: string[] =
+        this.configService.get<string>('API_KEYS')?.split(',') || [];
+
+    return apiKeys.find((key: string): boolean => apiKey == key);
   }
 }
